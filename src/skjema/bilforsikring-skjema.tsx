@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Field, ErrorMessage, FormikValues, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import '../App.scss';
+import './bilforsikring.scss';
 
 interface FormData {
     fornavn: string,
