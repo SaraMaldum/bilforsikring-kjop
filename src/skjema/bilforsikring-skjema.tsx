@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {Formik, Field, ErrorMessage} from 'formik';
+import React, { useState } from 'react';
+import { Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import '../App.scss';
 import './bilforsikring.scss';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faInfoCircle} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 interface FormData {
     fornavn: string,
