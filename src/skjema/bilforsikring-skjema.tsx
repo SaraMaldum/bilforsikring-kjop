@@ -1,15 +1,17 @@
-import React from 'react';
-import { Formik, Field, ErrorMessage, FormikValues, FormikHelpers } from 'formik';
+import React, {useState} from 'react';
+import {Formik, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import '../App.scss';
 import './bilforsikring.scss';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faInfoCircle} from '@fortawesome/free-solid-svg-icons';
 
 interface FormData {
     fornavn: string,
     etternavn: string,
     bonus: string,
     regnr: string,
-    fodselsnummer: string,
+    fnr: string,
     email: string
 }
 
@@ -19,33 +21,39 @@ const Form: React.FC = () => {
         etternavn: '',
         bonus: '60',
         regnr: '',
-        fodselsnummer: '',
+        fnr: '',
         email: ''
     };
+
+    const [price, setPrice] = useState<number | null>(null);
 
     const schema = Yup.object().shape({
         fornavn: Yup.string().required('Du må fylle ut fornavn'),
         etternavn: Yup.string().required('Du må fylle ut etternavn'),
         regnr: Yup.string().required('Du må fylle ut bilens registreringsnummer').matches(/^[A-Z]{2}\s\d{5}$/, 'Bilens registreringsnummer må være gyldig'),
-        fodselsnummer: Yup.string().required('Du må fylle inn ditt fødselsnummer').matches(/^(0[1-9]|[12]\d|3[01])(0[1-9]|1[0-2])\d{2}\d{5}$/, 'Fødselsnummer må være gyldig, 11 siffer'),
+        fnr: Yup.string().required('Du må fylle inn ditt fødselsnummer').matches(/^(0[1-9]|[12]\d|3[01])(0[1-9]|1[0-2])\d{2}\d{5}$/, 'Fødselsnummer må være gyldig, 11 siffer'),
         email: Yup.string().required('Du må fylle ut epostadressen din'),
     });
 
-    const handleSubmit = (
-        values: FormikValues,
-        {setSubmitting}: FormikHelpers<FormData>
-    ) => {
-        setTimeout(() => {
-            console.log(values);
-            setSubmitting(false);
-        }, 500);
+    const calculatePrice = (formData: FormData): number => {
+        return parseInt(formData.bonus) * 50;
+    };
+
+    const handleSubmit = (values: FormData) => {
+        const calculatedPrice = calculatePrice(values);
+        setPrice(calculatedPrice);
+    };
+
+    const handleCustomReset = (resetForm: () => void) => {
+        setPrice(null);
+        resetForm();
     };
 
     return (
         <Formik initialValues={initialValues}
                 validationSchema={schema}
                 onSubmit={handleSubmit}>
-            {({handleSubmit, handleReset}) => (
+            {({handleSubmit, resetForm}) => (
                 <form onSubmit={handleSubmit} className="bilforsikring-skjema">
                     <div className="bilforsikring-skjema--container">
                         <div className="bilforsikring-skjema--item">
@@ -67,9 +75,9 @@ const Form: React.FC = () => {
                         </div>
 
                         <div className="bilforsikring-skjema--item">
-                            <label htmlFor="fodselsnummer">Fødselsnummer
-                                <Field type="text" name="fodselsnummer" id="fodselsnummer" placeholder="11 siffer"/>
-                                <ErrorMessage name="fodselsnummer" component="div" className="error"/>
+                            <label htmlFor="fnr">Fødselsnummer
+                                <Field type="text" name="fnr" id="fnr" placeholder="11 siffer"/>
+                                <ErrorMessage name="fnr" component="div" className="error"/>
                             </label>
                         </div>
 
@@ -96,12 +104,22 @@ const Form: React.FC = () => {
                             </label>
                         </div>
 
+                        {price !== null && (
+                            <div className="bilforsikring-skjema--pris">
+                                <div>
+                                    <FontAwesomeIcon icon={faInfoCircle}/>
+                                    <span className="bilforsikring-skjema--prisbelop">Prisen på din forsikring pr år blir følgende: {price} kr.</span>
+                                </div>
+                            </div>
+                        )}
+
                         <div className="bilforsikring-skjema--item">
                             <button type="submit" className="btn btn-beregn">Beregn pris</button>
-                            <button type="button" onClick={handleReset} className="btn btn-avbryt">Avbryt</button>
+                            <button type="button" onClick={() => handleCustomReset(resetForm)}
+                                    className="btn btn-avbryt">Avbryt
+                            </button>
                         </div>
                     </div>
-                    {/*    Legg inn beregnet pris her */}
                 </form>
             )}
         </Formik>

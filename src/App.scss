@@ -1,18 +1,26 @@
+// Fonts
 @font-face {
   font-family: 'Profilfont-Regular-Web';
   src: local('Profilfont-Regular-Web'), url('./static/fonts/._Profilfont-Regular-Web.woff') format('woff'),
-       local('Profilfont-Regular-Web'), url('./static/fonts/._Profilfont-Regular-Web.woff2') format('woff2');
+  local('Profilfont-Regular-Web'), url('./static/fonts/._Profilfont-Regular-Web.woff2') format('woff2');
 }
 
+// Variables
+$font-primary: 'Profilfont-Regular-Web', sans-serif;
+$font-size-base: 1.4rem;
+
+// Styling
 body {
-  font-family: Profilfont-Regular-Web, sans-serif;
-  font-size: 1.4rem;
-  margin: 1rem;
-  align-items: center;
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  margin: 0;
+  padding: 1rem;
 }
 
 main {
-  align-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 h1 {
@@ -20,22 +28,26 @@ h1 {
 }
 
 .ingress {
-  max-width: 960px;
+  margin: 0 auto;
 }
 
 .error {
   color: #c93116;
-  margin-top: 0.2rem;
   font-size: 1.2rem;
+  margin-top: 0.2rem;
   padding-top: 0.6rem;
 }
 
 @media (min-width: 960px) {
   body {
-    max-width: 1500px;
     box-sizing: content-box;
-    display: block;
-    margin: auto;
+    margin: 0 auto;
+    max-width: 1500px;
     padding: 1.2rem;
+  }
+
+  .ingress {
+    margin: 0;
+    max-width: 960px;
   }
 }
