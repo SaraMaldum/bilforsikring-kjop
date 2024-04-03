@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Formik, Field, ErrorMessage, yupToFormErrors, FormikHelpers} from 'formik';
+import {Formik, Field, ErrorMessage, FormikHelpers} from 'formik';
 import * as Yup from 'yup';
 import '../App.scss';
 import './bilforsikring.scss';
