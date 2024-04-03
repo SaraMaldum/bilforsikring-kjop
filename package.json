@@ -2,6 +2,10 @@
   "name": "bilforsikring-kjop",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "^18.18.2",
+    "npm": "^9.8.1"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "6.5.2",
     "@fortawesome/free-solid-svg-icons": "6.5.2",

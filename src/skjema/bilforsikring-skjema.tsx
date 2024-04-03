@@ -65,7 +65,7 @@ const Form: React.FC = () => {
                             <label htmlFor="regnr">
                                 Bilens registreringsnummer
                                 <Field type="text" name="regnr" id="regnr" placeholder="E.g. AB 12345"/>
-                                <ErrorMessage name="regnr" component="div"  className={`error ${errors.regnr && 'show'}`}/>
+                                <ErrorMessage name="regnr" component="div"  className={`error ${errors.regnr && 'error-visible'}`}/>
                             </label>
                         </div>
 
@@ -84,7 +84,7 @@ const Form: React.FC = () => {
                             <label htmlFor="fnr">
                                 Fødselsnummer
                                 <Field type="text" name="fnr" id="fnr" placeholder="11 siffer"/>
-                                <ErrorMessage name="fnr" component="div" className={`error ${errors.fnr && 'show'}`}/>
+                                <ErrorMessage name="fnr" component="div" className={`error ${errors.fnr && 'error-visible'}`}/>
                             </label>
                         </div>
 
@@ -93,7 +93,7 @@ const Form: React.FC = () => {
                                 <label htmlFor="fornavn">
                                     Fornavn
                                     <Field type="text" name="fornavn" id="fornavn"/>
-                                    <ErrorMessage name="fornavn" component="div" className={`error ${errors.fornavn && 'show'}`}/>
+                                    <ErrorMessage name="fornavn" component="div" className={`error ${errors.fornavn && 'error-visible'}`}/>
                                 </label>
                             </div>
 
@@ -101,7 +101,7 @@ const Form: React.FC = () => {
                                 <label htmlFor="etternavn">
                                     Etternavn
                                     <Field type="text" name="etternavn" id="etternavn"/>
-                                    <ErrorMessage name="etternavn" component="div" className={`error ${errors.etternavn && 'show'}`}/>
+                                    <ErrorMessage name="etternavn" component="div" className={`error ${errors.etternavn && 'error-visible'}`}/>
                                 </label>
                             </div>
                         </div>
@@ -110,7 +110,7 @@ const Form: React.FC = () => {
                             <label htmlFor="email">
                                 Epostadresse
                                 <Field type="email" name="email" id="email" placeholder="test@test.com"/>
-                                <ErrorMessage name="email" component="div" className={`error ${errors.email && 'show'}`}/>
+                                <ErrorMessage name="email" component="div" className={`error ${errors.email && 'error-visible'}`}/>
                             </label>
                         </div>
 

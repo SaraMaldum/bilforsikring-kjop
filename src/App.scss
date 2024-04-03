@@ -51,11 +51,10 @@ h1 {
     }
   }
 
-  &.show {
+  &-visible {
     opacity: 1;
   }
 }
-
 
 @media (min-width: 960px) {
   body {
