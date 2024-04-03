@@ -70,7 +70,8 @@ const Form: React.FC = () => {
                         </div>
 
                         <div className="bilforsikring-skjema--item">
-                            <label htmlFor="bonus">Bonus
+                            <label htmlFor="bonus">
+                                Bonus
                                 <Field type="text" name="bonus" id="bonus" as="select">
                                     <option value="60">60</option>
                                     <option value="70">70</option>
@@ -80,7 +81,8 @@ const Form: React.FC = () => {
                         </div>
 
                         <div className="bilforsikring-skjema--item">
-                            <label htmlFor="fnr">Fødselsnummer
+                            <label htmlFor="fnr">
+                                Fødselsnummer
                                 <Field type="text" name="fnr" id="fnr" placeholder="11 siffer"/>
                                 <ErrorMessage name="fnr" component="div" className={`error ${errors.fnr && 'show'}`}/>
                             </label>
@@ -94,8 +96,10 @@ const Form: React.FC = () => {
                                     <ErrorMessage name="fornavn" component="div" className={`error ${errors.fornavn && 'show'}`}/>
                                 </label>
                             </div>
+
                             <div className="bilforsikring-skjema--item test">
-                                <label htmlFor="etternavn">Etternavn
+                                <label htmlFor="etternavn">
+                                    Etternavn
                                     <Field type="text" name="etternavn" id="etternavn"/>
                                     <ErrorMessage name="etternavn" component="div" className={`error ${errors.etternavn && 'show'}`}/>
                                 </label>
@@ -103,7 +107,8 @@ const Form: React.FC = () => {
                         </div>
 
                         <div className="bilforsikring-skjema--item">
-                            <label htmlFor="email">Epostadresse
+                            <label htmlFor="email">
+                                Epostadresse
                                 <Field type="email" name="email" id="email" placeholder="test@test.com"/>
                                 <ErrorMessage name="email" component="div" className={`error ${errors.email && 'show'}`}/>
                             </label>
@@ -116,16 +121,20 @@ const Form: React.FC = () => {
                                         <FontAwesomeIcon icon={faInfoCircle} className="bilforsikring-skjema--pris-ikon"/>
                                     </div>
                                     <div>
-                                        <span className="bilforsikring-skjema--prisbelop">Prisen på din forsikring pr år blir følgende: {price} kr.</span>
+                                        <span className="bilforsikring-skjema--prisbelop">
+                                            Prisen på din forsikring pr år blir følgende: {price} kr.
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         )}
 
                         <div className="bilforsikring-skjema--item">
-                            <button type="submit" className="btn btn-beregn">Beregn pris</button>
-                            <button type="button" onClick={() => handleCustomReset(resetForm)}
-                                    className="btn btn-avbryt">Avbryt
+                            <button type="submit" className="btn btn-beregn">
+                                Beregn pris
+                            </button>
+                            <button type="button" onClick={() => handleCustomReset(resetForm)} className="btn btn-avbryt">
+                                Avbryt
                             </button>
                         </div>
                     </div>
