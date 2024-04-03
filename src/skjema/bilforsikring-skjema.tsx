@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Formik, Field, ErrorMessage } from 'formik';
+import {Formik, Field, ErrorMessage, yupToFormErrors, FormikHelpers} from 'formik';
 import * as Yup from 'yup';
 import '../App.scss';
 import './bilforsikring.scss';
@@ -39,9 +39,13 @@ const Form: React.FC = () => {
         return parseInt(formData.bonus) * 50;
     };
 
-    const handleSubmit = (values: FormData) => {
+    const handleSubmit = (values: FormData, { setSubmitting }: FormikHelpers<FormData>) => {
         const calculatedPrice = calculatePrice(values);
         setPrice(calculatedPrice);
+
+        setTimeout(() => {
+            setSubmitting(false);
+        }, 2000);
     };
 
     const handleCustomReset = (resetForm: () => void) => {
@@ -49,18 +53,19 @@ const Form: React.FC = () => {
         resetForm();
     };
 
+
     return (
         <Formik initialValues={initialValues}
                 validationSchema={schema}
                 onSubmit={handleSubmit}>
-            {({handleSubmit, resetForm}) => (
+            {({handleSubmit, resetForm, errors}) => (
                 <form onSubmit={handleSubmit} className="bilforsikring-skjema">
                     <div className="bilforsikring-skjema--container">
                         <div className="bilforsikring-skjema--item">
                             <label htmlFor="regnr">
                                 Bilens registreringsnummer
                                 <Field type="text" name="regnr" id="regnr" placeholder="E.g. AB 12345"/>
-                                <ErrorMessage name="regnr" component="div" className="error"/>
+                                <ErrorMessage name="regnr" component="div"  className={`error ${errors.regnr && 'show'}`}/>
                             </label>
                         </div>
 
@@ -77,7 +82,7 @@ const Form: React.FC = () => {
                         <div className="bilforsikring-skjema--item">
                             <label htmlFor="fnr">Fødselsnummer
                                 <Field type="text" name="fnr" id="fnr" placeholder="11 siffer"/>
-                                <ErrorMessage name="fnr" component="div" className="error"/>
+                                <ErrorMessage name="fnr" component="div" className={`error ${errors.fnr && 'show'}`}/>
                             </label>
                         </div>
 
@@ -86,13 +91,13 @@ const Form: React.FC = () => {
                                 <label htmlFor="fornavn">
                                     Fornavn
                                     <Field type="text" name="fornavn" id="fornavn"/>
-                                    <ErrorMessage name="fornavn" component="div" className="error"/>
+                                    <ErrorMessage name="fornavn" component="div" className={`error ${errors.fornavn && 'show'}`}/>
                                 </label>
                             </div>
                             <div className="bilforsikring-skjema--item test">
                                 <label htmlFor="etternavn">Etternavn
                                     <Field type="text" name="etternavn" id="etternavn"/>
-                                    <ErrorMessage name="etternavn" component="div" className="error"/>
+                                    <ErrorMessage name="etternavn" component="div" className={`error ${errors.etternavn && 'show'}`}/>
                                 </label>
                             </div>
                         </div>
@@ -100,15 +105,19 @@ const Form: React.FC = () => {
                         <div className="bilforsikring-skjema--item">
                             <label htmlFor="email">Epostadresse
                                 <Field type="email" name="email" id="email" placeholder="test@test.com"/>
-                                <ErrorMessage name="email" component="div" className="error"/>
+                                <ErrorMessage name="email" component="div" className={`error ${errors.email && 'show'}`}/>
                             </label>
                         </div>
 
                         {price !== null && (
                             <div className="bilforsikring-skjema--pris">
-                                <div>
-                                    <FontAwesomeIcon icon={faInfoCircle}/>
-                                    <span className="bilforsikring-skjema--prisbelop">Prisen på din forsikring pr år blir følgende: {price} kr.</span>
+                                <div style={{display: 'flex'}}>
+                                    <div>
+                                        <FontAwesomeIcon icon={faInfoCircle} className="bilforsikring-skjema--pris-ikon"/>
+                                    </div>
+                                    <div>
+                                        <span className="bilforsikring-skjema--prisbelop">Prisen på din forsikring pr år blir følgende: {price} kr.</span>
+                                    </div>
                                 </div>
                             </div>
                         )}
